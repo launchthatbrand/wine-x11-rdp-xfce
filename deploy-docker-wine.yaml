@@ -27,18 +27,19 @@ spec:
           value: $Username
         - name: PASSWD
           value: $Password
-        
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: "$Username-service"
+  name: "$Username-docker-wine"
   labels:
-    app: $Username
+    app: "$Username-docker-wine"
 spec:
   ports:
-    - port: 3389
+  - port: 3389
+    protocol: TCP
+    targetPort: 3389
   selector:
-    app: $Username
-    tier: frontend
-  type: LoadBalancer
+    app: "$Username-docker-wine"
+    client: $Username
+  type: ClusterIP
