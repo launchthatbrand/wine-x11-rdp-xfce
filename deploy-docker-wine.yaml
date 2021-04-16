@@ -27,3 +27,18 @@ spec:
           value: $Username
         - name: PASSWD
           value: $Password
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "$Username-service"
+  labels:
+    app: $Username
+spec:
+  ports:
+    - port: 3389
+  selector:
+    app: $Username
+    tier: frontend
+  type: LoadBalancer
