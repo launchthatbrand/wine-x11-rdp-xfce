@@ -1,29 +1,29 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: "${Username}-docker-wine"
+  name: "$Username-docker-wine"
   labels:
-    app: "${Username}-docker-wine"
+    app: "$Username-docker-wine"
 spec:
   selector:
     matchLabels:
-      app: "${Username}-docker-wine"
-      client: ${Username}
+      app: "$Username-docker-wine"
+      client: $Username
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: "${Username}-docker-wine"
-        client: ${Username}
+        app: "$Username-docker-wine"
+        client: $Username
     spec:
       containers:
       - image: scottyhardy/docker-wine
-        name: "${Username}-docker-wine"
+        name: "$Username-docker-wine"
         env:
         - name: RDP_SERVER
           value: "yes"
         - name: USER_NAME
-          value: ${Username}
+          value: $Username
         - name: PASSWD
-          value: ${Password}
+          value: $Password
