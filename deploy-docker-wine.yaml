@@ -42,4 +42,4 @@ spec:
   selector:
     app: "$Username-docker-wine"
     client: $Username
-  type: LoadBalancer
+  type: ClusterIP
