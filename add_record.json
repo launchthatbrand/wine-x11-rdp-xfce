@@ -9,7 +9,7 @@
             {
               "path": "/",
               "backend": {
-                "serviceName": "$Username-service",
+                "serviceName": "$Username-docker-wine",
                 "servicePort": 3389
               }
             }
