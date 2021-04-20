@@ -20,6 +20,13 @@ spec:
       containers:
       - image: scottyhardy/docker-wine
         name: "$Username-docker-wine"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "$MEM$mi"
+            cpu: "$CPU$m"
         env:
         - name: RDP_SERVER
           value: "yes"
@@ -27,6 +34,16 @@ spec:
           value: $Username
         - name: PASSWD
           value: $Password
+        ports:
+        - containerPort: 3389
+          name: $Username-docker-wine
+        volumeMounts:
+        - name: $Username-docker-wine
+          mountPath: /home
+      volumes:
+      - name: $Username-docker-wine
+        persistentVolumeClaim:
+          claimName: $Username-docker-wine
 ---
 apiVersion: v1
 kind: Service
@@ -43,3 +60,14 @@ spec:
     app: "$Username-docker-wine"
     client: $Username
   type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: $Username-docker-wine
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
