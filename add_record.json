@@ -7,7 +7,6 @@
         "http": {
           "paths": [
             {
-              "path": "/",
               "backend": {
                 "serviceName": "$Username-docker-wine",
                 "servicePort": 3389
