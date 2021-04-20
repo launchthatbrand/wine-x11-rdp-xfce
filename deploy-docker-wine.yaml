@@ -34,9 +34,6 @@ spec:
           value: $Username
         - name: PASSWD
           value: $Password
-        ports:
-        - containerPort: 3389
-          name: $Username-docker-wine
         volumeMounts:
         - name: $Username-docker-wine
           mountPath: /home
