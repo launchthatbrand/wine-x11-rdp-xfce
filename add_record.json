@@ -3,7 +3,7 @@
       "op": "add",
       "path": "/spec/rules/-",
       "value": {
-        "host": "$Username.onpoint.link",
+        "host": "$Username-$random.onpoint.link",
         "http": {
           "paths": [
             {
