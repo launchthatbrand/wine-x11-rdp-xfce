@@ -32,7 +32,7 @@ spec:
           value: "yes"
         - name: USER_NAME
           value: $Username
-        - name: PASSWD
+        - name: USER_PASSWD
           value: $Password
         volumeMounts:
         - name: $Username-docker-wine
