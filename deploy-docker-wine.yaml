@@ -33,7 +33,7 @@ spec:
         - name: USER_NAME
           value: $Username
         - name: USER_PASSWD
-          value: $Password
+          value: $USER_PASSWD
         volumeMounts:
         - name: $Username-docker-wine
           mountPath: /home
