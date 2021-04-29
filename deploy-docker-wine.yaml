@@ -25,8 +25,8 @@ spec:
             memory: "64Mi"
             cpu: "100m"
           limits:
-            memory: "$MEM$mi"
-            cpu: "$CPU$m"
+            memory: "${MEM}Gi"
+            cpu: "${CPU}m"
         env:
         - name: RDP_SERVER
           value: "yes"
@@ -48,6 +48,7 @@ metadata:
   name: "$Username-docker-wine"
   labels:
     app: "$Username-docker-wine"
+    client: $Username
 spec:
   ports:
   - port: 3389
@@ -56,7 +57,7 @@ spec:
   selector:
     app: "$Username-docker-wine"
     client: $Username
-  type: ClusterIP
+  type: $type
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
