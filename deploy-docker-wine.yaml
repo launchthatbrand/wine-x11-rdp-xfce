@@ -1,25 +1,26 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: "$Username-docker-wine"
+  name: "$Username-$random-docker-wine"
   labels:
-    app: "$Username-docker-wine"
+    app: "$Username-$random-docker-wine"
+    client: "$Username-$random"
 spec:
   selector:
     matchLabels:
-      app: "$Username-docker-wine"
-      client: $Username
+      app: "$Username-$random-docker-wine"
+      client: "$Username-$random"
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: "$Username-docker-wine"
-        client: $Username
+        app: "$Username-$random-docker-wine"
+        client: "$Username-$random"
     spec:
       containers:
       - image: scottyhardy/docker-wine
-        name: "$Username-docker-wine"
+        name: "$Username-$random-docker-wine"
         resources:
           requests:
             memory: "64Mi"
@@ -32,37 +33,40 @@ spec:
           value: "yes"
         - name: USER_NAME
           value: $Username
-        - name: PASSWORD
+        - name: USER_PASSWD
           value: $Password
         volumeMounts:
-        - name: $Username-docker-wine
-          mountPath: /home
+        - name: $Username-$random-docker-wine
+          mountPath: /home/$Username
       volumes:
-      - name: $Username-docker-wine
+      - name: $Username-$random-docker-wine
         persistentVolumeClaim:
-          claimName: $Username-docker-wine
+          claimName: $Username-$random-docker-wine
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: "$Username-docker-wine"
+  name: "$Username-$random-docker-wine"
   labels:
-    app: "$Username-docker-wine"
-    client: $Username
+    app: "$Username-$random-docker-wine"
+    client: "$Username-$random"
 spec:
   ports:
   - port: 3389
     protocol: TCP
     targetPort: 3389
   selector:
-    app: "$Username-docker-wine"
-    client: $Username
+    app: "$Username-$random-docker-wine"
+    client: "$Username-$random"
   type: $type
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: $Username-docker-wine
+  name: "$Username-$random-docker-wine"
+  labels:
+    app: "$Username-$random-docker-wine"
+    client: "$Username-$random"
 spec:
   accessModes:
     - ReadWriteOnce
